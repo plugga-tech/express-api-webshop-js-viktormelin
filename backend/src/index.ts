@@ -5,6 +5,7 @@ import userRouter from './routes/user.routes';
 import errorHandler from './middlewares/error.middleware';
 import productRouter from './routes/products.routes';
 import categoryRouter from './routes/categories.routes';
+import orderRouter from './routes/orders.routes';
 
 const PORT = 3000;
 
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 app.use('/api/categories', categoryRouter);
+app.use('/api/orders', orderRouter);
 
 app.use(errorHandler);
 
