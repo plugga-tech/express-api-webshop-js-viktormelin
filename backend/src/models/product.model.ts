@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { InferSchemaType, Schema, model } from 'mongoose';
 
 const productSchema = new Schema({
   name: {
@@ -22,6 +22,8 @@ const productSchema = new Schema({
     ref: 'Category',
   },
 });
+
+export type Product = InferSchemaType<typeof productSchema>;
 
 const Product = model('Product', productSchema);
 
