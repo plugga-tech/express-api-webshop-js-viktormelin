@@ -4,24 +4,14 @@ import User from '../models/user.model';
 import { signJWT } from '../utils/jwt';
 
 export const getUsers = asyncHandler(async (req, res) => {
-  const users = await User.find();
+  const users = await User.find().select('-password');
 
   if (!users) {
     res.status(500);
     throw new Error('Failed to fetch users from server');
   }
 
-  const rUsers = [];
-
-  for (const user of users) {
-    rUsers.push({
-      _id: user.id,
-      name: user.name,
-      email: user.email,
-    });
-  }
-
-  res.status(200).json(rUsers);
+  res.status(200).json(users);
 });
 
 export const getUser = asyncHandler(async (req, res) => {
@@ -32,14 +22,10 @@ export const getUser = asyncHandler(async (req, res) => {
     throw new Error('Missing required fields');
   }
 
-  const user = await User.findById({ _id: id });
+  const user = await User.findById(id).select('-password');
 
   if (user) {
-    res.status(201).json({
-      _id: user.id,
-      name: user.name,
-      email: user.email,
-    });
+    res.status(200).json(user);
   } else {
     res.status(404);
     throw new Error('No user found');
@@ -75,8 +61,8 @@ export const createUser = asyncHandler(async (req, res) => {
       token: await signJWT(createdUser._id),
     });
   } else {
-    res.status(400).send('Invalid user data');
-    throw new Error('Invalid user data');
+    res.status(500);
+    throw new Error('Failed to create user');
   }
 });
 
@@ -88,7 +74,7 @@ export const loginUser = asyncHandler(async (req, res) => {
     throw new Error('Missing required fields');
   }
 
-  const foundUser = await User.findOne({ email });
+  const foundUser = await User.findOne({ email }).select('-password');
 
   if (!foundUser) {
     res.status(404);
@@ -103,7 +89,7 @@ export const loginUser = asyncHandler(async (req, res) => {
         token: await signJWT(foundUser._id),
       });
     } else {
-      res.status(400);
+      res.status(401);
       throw new Error('Invalid credentials');
     }
   } catch (error) {
