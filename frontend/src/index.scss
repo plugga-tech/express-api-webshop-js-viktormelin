@@ -2,6 +2,11 @@
   box-sizing: border-box;
   text-decoration: none;
   list-style: none;
+  color: inherit;
+}
+
+a {
+  display: flex;
 }
 
 body {
@@ -45,8 +50,9 @@ body {
 
     &-item {
       position: relative;
-      display: grid;
-      place-items: center;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       padding: 0.5rem;
       background-color: rgb(100, 100, 100);
       color: #fff;
