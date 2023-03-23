@@ -83,7 +83,7 @@ export const loginUser = asyncHandler(async (req, res) => {
 
   try {
     if (await argon2.verify(foundUser.password, password)) {
-      res.status(201).json({
+      res.status(200).json({
         _id: foundUser.id,
         name: foundUser.name,
         token: await signJWT(foundUser._id),
