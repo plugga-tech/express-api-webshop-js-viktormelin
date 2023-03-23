@@ -6,3 +6,9 @@ export interface Product {
   lager: number;
   category: string;
 }
+
+export interface User {
+  _id: string;
+  name: string;
+  token: string;
+}
