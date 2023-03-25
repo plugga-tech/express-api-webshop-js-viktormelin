@@ -7,8 +7,17 @@ export interface Product {
   category: string;
 }
 
+export interface Cart extends Product {
+  count: number;
+}
+
 export interface User {
   _id: string;
   name: string;
   token: string;
+}
+
+export interface Category {
+  _id: string;
+  name: string;
 }
