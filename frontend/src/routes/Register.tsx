@@ -10,7 +10,9 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onClick = async () => {
+  const onClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
     const user = await register(name, email, password);
     if (user) {
       navigate('/admin');
