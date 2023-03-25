@@ -61,3 +61,15 @@ body {
     }
   }
 }
+
+.category {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  &__products {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
