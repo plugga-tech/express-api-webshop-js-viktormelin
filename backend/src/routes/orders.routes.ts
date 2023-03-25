@@ -5,7 +5,7 @@ import { createOrder, getOrder, getOrders } from '../controllers/order.controlle
 const orderRouter = Router();
 
 orderRouter.get('/all/:token', getOrders);
-orderRouter.get('/user', protect, getOrder);
+orderRouter.post('/user', protect, getOrder);
 orderRouter.post('/add', createOrder);
 
 export default orderRouter;

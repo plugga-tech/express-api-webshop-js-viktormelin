@@ -74,7 +74,7 @@ export const loginUser = asyncHandler(async (req, res) => {
     throw new Error('Missing required fields');
   }
 
-  const foundUser = await User.findOne({ email }).select('-password');
+  const foundUser = await User.findOne({ email });
 
   if (!foundUser) {
     res.status(404);
@@ -94,6 +94,6 @@ export const loginUser = asyncHandler(async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    throw new Error(typeof error === 'string' ? error : 'Password missmatch error');
+    throw new Error(typeof error === 'string' ? error : 'Invalid credentials');
   }
 });
