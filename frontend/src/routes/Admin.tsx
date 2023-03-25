@@ -1,24 +1,30 @@
 import { IconSettings, IconShoppingCart } from '@tabler/icons-react';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Product } from '../types/typings';
 import useProducts from '../hooks/useProducts';
 import Products from '../components/Products';
-import AuthContext from '../utils/AuthContext';
 import Navbar from '../components/Navbar';
+import { useNavigate } from 'react-router-dom';
+import useUser from '../hooks/useUser';
 
 const Admin = () => {
-  const { user } = useContext(AuthContext);
+  const { getUser } = useUser();
+  const user = getUser();
 
-  if (user) {
-    return (
-      <div>
-        <Navbar />
-        <p>You are logged in {user.name}</p>
-      </div>
-    );
-  } else {
-    return <p>Not logged in</p>;
-  }
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    }
+  }, []);
+
+  return (
+    <div>
+      <Navbar />
+      <p>You are logged in {user?.name}</p>
+    </div>
+  );
 };
 
 export default Admin;

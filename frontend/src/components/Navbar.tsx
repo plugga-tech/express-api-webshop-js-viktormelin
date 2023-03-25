@@ -1,18 +1,19 @@
-import { IconLogout, IconSettings, IconShoppingCart } from '@tabler/icons-react';
+import { IconFile, IconList, IconLogout, IconSettings, IconShoppingCart } from '@tabler/icons-react';
 import React, { useState } from 'react';
 import { Product } from '../types/typings';
 import { Link } from 'react-router-dom';
 import useUser from '../hooks/useUser';
+import useCart from '../hooks/useCart';
 
 interface Props {
   showCart?: boolean;
-  addToCart?: (product: Product) => void;
 }
 
-const Navbar = ({ showCart, addToCart }: Props) => {
-  const { user, logout } = useUser();
+const Navbar = ({ showCart }: Props) => {
+  const { getUser, logout } = useUser();
+  const user = getUser();
 
-  const [cart, setCart] = useState<Product[]>();
+  const { cart } = useCart();
 
   return (
     <div className='nav'>
@@ -30,6 +31,12 @@ const Navbar = ({ showCart, addToCart }: Props) => {
             </li>
           </Link>
         ) : null}
+        <Link to='/orders'>
+          <li className='nav__settings-item'>
+            <IconFile />
+            Ordrar
+          </li>
+        </Link>
         <Link to='/admin'>
           <li className='nav__settings-item'>
             <IconSettings />
