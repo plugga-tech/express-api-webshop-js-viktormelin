@@ -1,15 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Product } from '../types/typings';
-import { Products } from '../utils/store';
+import { Category } from '../types/typings';
+import { Categories } from '../utils/store';
 
-const useProducts = () => {
+const useCategories = () => {
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<Product[]>(Products);
+  const [data, setData] = useState<Category[]>(Categories);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get<Product[]>('http://localhost:3000/api/products');
+      const response = await axios.get<Category[]>('http://localhost:3000/api/categories');
 
       if (response.status === 200) {
         setData(data.concat(response.data));
@@ -26,4 +26,4 @@ const useProducts = () => {
   return { loading, data };
 };
 
-export default useProducts;
+export default useCategories;
