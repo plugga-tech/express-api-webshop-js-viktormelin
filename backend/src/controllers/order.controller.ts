@@ -37,7 +37,7 @@ export const getOrder = asyncHandler(async (req, res) => {
     throw new Error('Missing required fields');
   }
 
-  const orders = await Order.find(user);
+  const orders = await Order.find({ user });
 
   if (!orders) {
     res.status(500);
