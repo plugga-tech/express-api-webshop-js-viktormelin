@@ -8,7 +8,6 @@ import Root from './routes/Root';
 import Login from './routes/Login';
 import useUser from './hooks/useUser';
 import Register from './routes/Register';
-import CartContext from './utils/CartContext';
 import useCart from './hooks/useCart';
 import Orders from './routes/Orders';
 import Cart from './routes/Cart';
