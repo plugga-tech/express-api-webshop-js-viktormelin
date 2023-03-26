@@ -68,5 +68,5 @@ export const createOrder = asyncHandler(async (req, res) => {
     });
   }
 
-  res.status(200).json(order);
+  res.status(201).json(order);
 });
