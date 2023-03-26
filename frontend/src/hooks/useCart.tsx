@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Cart, Product } from '../types/typings';
 import { useAtom } from 'jotai';
 import { cartAtomPersistance } from '../utils/store';
+import useProducts from './useProducts';
 
 const useCart = () => {
+  const { data } = useProducts();
   const [cartJSON, setCart] = useAtom(cartAtomPersistance);
 
   let cart: Cart[] = [];
@@ -29,7 +31,7 @@ const useCart = () => {
 
   const removeFromCart = (product: Product, count: number) => {
     const tempCart = cart;
-    const index = tempCart.indexOf({ ...product, count });
+    const index = tempCart.map((item) => item._id).indexOf(product._id);
     if (index > -1) {
       tempCart.splice(index, 1);
     }
@@ -52,7 +54,7 @@ const useCart = () => {
 
   const clearCart = () => {
     setCart([]);
-    updateStorage();
+    localStorage.removeItem('cart');
   };
 
   useEffect(() => {

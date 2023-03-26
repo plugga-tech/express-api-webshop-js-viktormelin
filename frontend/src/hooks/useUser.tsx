@@ -25,7 +25,7 @@ const useUser = () => {
         localStorage.setItem('user', JSON.stringify(response.data));
         setUser(response.data);
 
-        return user;
+        return response.data;
       }
     } catch (error) {
       const { response } = error as AxiosError;
@@ -54,7 +54,7 @@ const useUser = () => {
 
   const getUser = () => {
     if (user) {
-      return JSON.parse(user);
+      return JSON.parse(user) as User;
     }
 
     return null;
