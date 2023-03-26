@@ -16,7 +16,7 @@ const Login = () => {
     const user = await login(email, password);
 
     if (user && typeof user !== 'string') {
-      navigate('/admin');
+      navigate('/');
     } else if (typeof user === 'string') {
       setError(user);
     }
