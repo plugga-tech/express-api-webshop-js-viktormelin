@@ -11,12 +11,8 @@ import { useAtomValue } from 'jotai';
 
 const Orders = () => {
   const { loading, data } = useOrders();
-
-  console.log(data);
-
   const { getUser } = useUser();
   const user = getUser();
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,8 +30,19 @@ const Orders = () => {
         <>
           {data.map((item) => (
             <div>
-              <p>{item.name}</p>
-              <p>{item.count}</p>
+              <h3>{item._id}</h3>
+              <table>
+                <tr>
+                  <th>Produkt ID</th>
+                  <th>Antal</th>
+                </tr>
+                {item.products.map((product) => (
+                  <tr>
+                    <td>{product.productId}</td>
+                    <td>{product.quantity}</td>
+                  </tr>
+                ))}
+              </table>
             </div>
           ))}
         </>
